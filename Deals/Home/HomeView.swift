@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol HomeViewDelegate: AnyObject {
+    func goToSignIn() -> Void
+    func goToSignUp() -> Void
+}
+
 class HomeView: UIView {
+    
+    weak var delegate: HomeViewDelegate?
     
     private lazy var homeImageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,6 +70,8 @@ class HomeView: UIView {
     
     private lazy var signInButton: UIButton = {
         let button = CustomButton(text: "Sign In", color: "SecondaryAccentColor")
+    
+        button.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -71,6 +80,8 @@ class HomeView: UIView {
     
     private lazy var signUpButton: UIButton = {
         let button = CustomButton(text: "Sign Up", color: "PrimaryAccentColor")
+        
+        button.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -87,6 +98,8 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+//MARK: - Layout and Style
 
 extension HomeView {
     
@@ -135,5 +148,18 @@ extension HomeView {
             signUpButton.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor),
             signUpButton.heightAnchor.constraint(equalToConstant: 56),
         ])
+    }
+}
+
+//MARK: - Actions
+
+extension HomeView {
+    
+    @objc func didTapSignIn() {
+        delegate?.goToSignIn()
+    }
+    
+    @objc func didTapSignUp() {
+        delegate?.goToSignUp()
     }
 }

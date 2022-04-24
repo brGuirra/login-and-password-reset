@@ -9,16 +9,33 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let homeView: HomeView = {
-       let view = HomeView()
-        
-        return view
-    }()
-
+    override func loadView() {
+        view = HomeView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let view = view as? HomeView else {
+            fatalError("Couldn't typecast the View as instance of HomeView")
+        }
         
-        self.view = homeView
+        view.delegate = self
+    }
+}
+
+//MARK: - HomeViewDelegate
+
+extension HomeViewController: HomeViewDelegate {
+    
+    func goToSignIn() {
+        let vc = SignInViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func goToSignUp() {
+        let vc = SignUpViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
