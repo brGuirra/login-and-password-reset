@@ -17,11 +17,7 @@ class HomeView: UIView {
     weak var delegate: HomeViewDelegate?
     
     private lazy var homeImageView: UIImageView = {
-        let imageView = UIImageView()
-        let homeImage = UIImage(named: "Home")
-        
-        imageView.image = homeImage
-        imageView.contentMode = .scaleAspectFit
+        let imageView = IllustrationImageView(imageName: "Home")
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -110,7 +106,7 @@ extension HomeView {
     }
     
     func style() {
-        
+        self.backgroundColor = .systemBackground
     }
     
     func layout() {
