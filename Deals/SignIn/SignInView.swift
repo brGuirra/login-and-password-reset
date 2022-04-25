@@ -45,6 +45,14 @@ class SignInView: UIView {
         return textField
     }()
     
+    private lazy var loginInButton: UIButton = {
+        let button = CustomButton(text: "Login", color: "PrimaryAccentColor")
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -75,6 +83,7 @@ extension SignInView {
         addSubview(signInTitle)
         addSubview(emailTextField)
         addSubview(passwordTextField)
+        addSubview(loginInButton)
     }
     
     private func configConstraints() {
@@ -85,11 +94,11 @@ extension SignInView {
             trailingAnchor.constraint(equalToSystemSpacingAfter: signInImageView.trailingAnchor, multiplier: 3),
             
             // Sign Title
-            signInTitle.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: signInImageView.bottomAnchor, multiplier: 8),
+            signInTitle.topAnchor.constraint(equalToSystemSpacingBelow: signInImageView.bottomAnchor, multiplier: 8),
             signInTitle.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             // EmailTextField
-            emailTextField.topAnchor.constraint(equalToSystemSpacingBelow: signInTitle.bottomAnchor, multiplier: 8),
+            emailTextField.topAnchor.constraint(equalToSystemSpacingBelow: signInTitle.bottomAnchor, multiplier: 6),
             emailTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 3),
             trailingAnchor.constraint(equalToSystemSpacingAfter: emailTextField.trailingAnchor, multiplier: 3),
             
@@ -97,6 +106,12 @@ extension SignInView {
             passwordTextField.topAnchor.constraint(equalToSystemSpacingBelow: emailTextField.bottomAnchor, multiplier: 3),
             passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            
+            // Sign In Button
+            loginInButton.topAnchor.constraint(equalToSystemSpacingBelow: passwordTextField.bottomAnchor, multiplier: 4),
+            loginInButton.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            loginInButton.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            loginInButton.heightAnchor.constraint(equalToConstant: 56),
         ])
     }
 }
