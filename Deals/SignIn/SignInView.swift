@@ -60,24 +60,24 @@ class SignInView: UIView {
 
 extension SignInView {
     
-    func setUp() {
+    private func setUp() {
         style()
         layout()
         configConstraints()
     }
     
-    func style() {
+    private func style() {
         self.backgroundColor = .systemBackground
     }
     
-    func layout() {
+    private func layout() {
         addSubview(signInImageView)
         addSubview(signInTitle)
         addSubview(emailTextField)
         addSubview(passwordTextField)
     }
     
-    func configConstraints() {
+    private func configConstraints() {
         NSLayoutConstraint.activate([
             // Sign In Image
             signInImageView.topAnchor.constraint(equalToSystemSpacingBelow: safeAreaLayoutGuide.topAnchor, multiplier: 3),

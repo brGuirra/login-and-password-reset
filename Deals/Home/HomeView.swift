@@ -42,7 +42,6 @@ class HomeView: UIView {
         label.text = "Get the best deals!"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.textColor = UIColor(named: "SecondaryAccentColor")
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -99,17 +98,17 @@ class HomeView: UIView {
 
 extension HomeView {
     
-    func setUp() {
+    private func setUp() {
         style()
         layout()
         configConstraints()
     }
     
-    func style() {
+    private func style() {
         self.backgroundColor = .systemBackground
     }
     
-    func layout() {
+    private func layout() {
         addSubview(homeImageView)
         
         introStackView.addArrangedSubview(introTitle)
@@ -120,7 +119,7 @@ extension HomeView {
         addSubview(signUpButton)
     }
     
-    func configConstraints() {
+    private func configConstraints() {
         NSLayoutConstraint.activate([
             // Home Image
             homeImageView.topAnchor.constraint(equalToSystemSpacingBelow: safeAreaLayoutGuide.topAnchor, multiplier: 3),

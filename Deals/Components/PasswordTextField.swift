@@ -86,12 +86,8 @@ class PasswordTextField: UIView {
 extension PasswordTextField {
     
     private func setupView() {
-        style()
         layout()
         configConstraints()
-    }
-    
-    private func style() {
     }
     
     private func layout() {

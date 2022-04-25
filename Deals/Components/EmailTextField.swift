@@ -72,12 +72,8 @@ class EmailTextField: UIView {
 extension EmailTextField {
     
     private func setupView() {
-        style()
         layout()
         configConstraints()
-    }
-    
-    private func style() {
     }
     
     private func layout() {

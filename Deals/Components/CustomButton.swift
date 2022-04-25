@@ -25,7 +25,7 @@ class CustomButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func style() {
+    private func style() {
         layer.cornerRadius = 16
         setTitle(text, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)

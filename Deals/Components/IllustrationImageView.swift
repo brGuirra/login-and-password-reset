@@ -23,7 +23,7 @@ class IllustrationImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func style() {
+    private func style() {
         image = UIImage(named: imageName)
         contentMode = .scaleAspectFit
     }

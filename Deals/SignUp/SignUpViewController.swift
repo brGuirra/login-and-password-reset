@@ -9,10 +9,11 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    override func loadView() {
+        self.view = SignUpView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Sign Up"
-        view.backgroundColor = .yellow
     }
 }
