@@ -15,7 +15,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         guard let view = view as? HomeView else {
             fatalError("Couldn't typecast the View as instance of HomeView")
         }

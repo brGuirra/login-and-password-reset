@@ -20,7 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationVC = UINavigationController(rootViewController: HomeViewController())
         window?.rootViewController = navigationVC
         
+        let config = UIImage.SymbolConfiguration(pointSize: 32)
+        let backButtonImage = UIImage(systemName: "arrow.turn.up.left", withConfiguration: config)
+        
+        navigationVC.navigationBar.backIndicatorImage = backButtonImage
+        navigationVC.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
+        navigationVC.navigationBar.topItem?.backButtonTitle = ""
+        navigationVC.navigationBar.tintColor = .label
+        
         return true
     }
 }
-

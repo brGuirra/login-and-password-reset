@@ -215,7 +215,7 @@ extension SignUpView {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             // Title Label
-            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 8),
+            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 12),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             // Form StackView
