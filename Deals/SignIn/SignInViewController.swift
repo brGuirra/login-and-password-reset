@@ -9,7 +9,15 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
-    override func loadView() {
-        view = SignInView()
+    private let signInView: SignInView = {
+        let view = SignInView()
+        
+        return view
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view = signInView
     }
 }

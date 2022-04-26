@@ -9,17 +9,18 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    override func loadView() {
-        view = HomeView()
-    }
+    private let homeView: HomeView = {
+        let view = HomeView()
+        
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let view = view as? HomeView else {
-            fatalError("Couldn't typecast the View as instance of HomeView")
-        }
         
-        view.delegate = self
+        view = homeView
+        
+        homeView.delegate = self
     }
 }
 
