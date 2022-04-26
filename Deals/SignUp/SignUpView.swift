@@ -145,7 +145,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var registerButton: UIButton = {
-        let button = CustomButton(text: "Register", color: "PrimaryAccentColor")
+        let button = UIButton.createCustomButton(text: "Register", color: UIColor(named: "Blue"))
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -243,7 +243,7 @@ extension SignUpView {
         
         var boldTextAttributes = [NSAttributedString.Key: AnyObject]()
         boldTextAttributes[.font] = UIFont.systemFont(ofSize: 13, weight: .bold)
-        boldTextAttributes[.foregroundColor] = UIColor(named: "PrimaryAccentColor")
+        boldTextAttributes[.foregroundColor] = UIColor(named: "Blue")
         
         let attrText = NSMutableAttributedString(string: "The password must meet ", attributes: plainTextAttributes)
         attrText.append(NSAttributedString(string: "at least 3 of 4 ", attributes: boldTextAttributes))
@@ -259,7 +259,7 @@ extension SignUpView {
         
         var boldTextAttributes = [NSAttributedString.Key: AnyObject]()
         boldTextAttributes[.font] = UIFont.systemFont(ofSize: 13, weight: .bold)
-        boldTextAttributes[.foregroundColor] = UIColor(named: "PrimaryAccentColor")
+        boldTextAttributes[.foregroundColor] = UIColor(named: "Blue")
         
         let attrText = NSMutableAttributedString(string: "By clicking on register you agree with our ", attributes: plainTextAttributes)
         attrText.append(NSAttributedString(string: "Terms & Conditions ", attributes: boldTextAttributes))

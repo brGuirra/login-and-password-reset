@@ -64,14 +64,9 @@ class HomeView: UIView {
     }()
     
     private lazy var signInButton: UIButton = {
-//        let button = CustomButton(text: "Sign In", color: "SecondaryAccentColor")
-//
-//        button.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+        let button = UIButton.createCustomButton(text: "Sing In", color: UIColor.label)
         
-        let button = UIButton(type: .system)
-        button.setTitle("Sign In", for: .normal)
-        button.setTitleColor(UIColor.label, for: .normal)
-        button.backgroundColor = button.isEnabled ? UIColor.systemBlue : UIColor.systemOrange
+        button.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
         
         button.translatesAutoresizingMaskIntoConstraints = false
 
@@ -79,7 +74,7 @@ class HomeView: UIView {
     }()
     
     private lazy var signUpButton: UIButton = {
-        let button = CustomButton(text: "Sign Up", color: "PrimaryAccentColor")
+        let button = UIButton.createCustomButton(text: "Sign Up", color: UIColor(named: "Blue"))
         
         button.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
         
@@ -140,7 +135,7 @@ extension HomeView {
             signInButton.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: introStackView.bottomAnchor, multiplier: 6),
             signInButton.leadingAnchor.constraint(equalTo: homeImageView.leadingAnchor),
             signInButton.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor),
-//            signInButton.heightAnchor.constraint(equalToConstant: 56),
+            signInButton.heightAnchor.constraint(equalToConstant: 56),
             
             // Sign Up Button
             signUpButton.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: signInButton.bottomAnchor, multiplier: 2),
