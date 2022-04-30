@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IllustrationImageView: UIImageView {
+class IllustrationImageComponent: UIImageView {
 
     private let imageName: String
     

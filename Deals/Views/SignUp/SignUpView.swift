@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol SignUpViewDelegate: AnyObject {
+    func validatePassword(_ password: String) -> Void
+}
+
 class SignUpView: UIView {
+    
+    weak var delegate: SignUpViewDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -31,8 +37,17 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    private lazy var nameTextField: EmailTextField = {
-        let textField = EmailTextField(symbolName: "person.circle", placeholderText: "Enter your name")
+    private lazy var nameTextField: TextFieldComponent = {
+        let textField = TextFieldComponent(symbolName: "person.circle", placeholderText: "Enter your name", capitalizationType: .words)
+        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textField
+    }()
+    
+    private lazy var emailTextField: TextFieldComponent = {
+        let textField = TextFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
         
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -41,28 +56,8 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var emailTextField: EmailTextField = {
-        let textField = EmailTextField(symbolName: "envelope.circle", placeholderText: "Enter your email")
-        
-        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
-    }()
-    
-    private lazy var passwordTextField: PasswordTextField = {
-        let textField = PasswordTextField(placeholderText: "Enter your password")
-        
-        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
-    }()
-    
-    private lazy var confirmationPasswordTextField: PasswordTextField = {
-        let textField = PasswordTextField(placeholderText: "Confirm your password")
+    private lazy var passwordTextField: PasswordTextFieldComponent = {
+        let textField = PasswordTextFieldComponent(placeholderText: "Enter your password")
         
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -86,8 +81,8 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    private lazy var lengthCriteriaView: PasswordCriteriaView = {
-        let lengthCriteriaView = PasswordCriteriaView(criteriaText: "8-32 characters without spaces")
+    private lazy var lengthCriteriaView: PasswordCriteriaComponent = {
+        let lengthCriteriaView = PasswordCriteriaComponent(criteriaText: "8-32 characters without spaces")
         
         lengthCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         lengthCriteriaView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,8 +103,8 @@ class SignUpView: UIView {
         return label
     }()
     
-    private lazy var uppercaseCriteriaView: PasswordCriteriaView = {
-        let uppercaseCriteriaView = PasswordCriteriaView(criteriaText: "Uppercase letter (A - Z)")
+    private lazy var uppercaseCriteriaView: PasswordCriteriaComponent = {
+        let uppercaseCriteriaView = PasswordCriteriaComponent(criteriaText: "Uppercase letter (A - Z)")
         
         uppercaseCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         uppercaseCriteriaView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,8 +112,8 @@ class SignUpView: UIView {
         return uppercaseCriteriaView
     }()
     
-    private lazy var lowercaseCriteriaView: PasswordCriteriaView = {
-        let lowercaseCriteriaView = PasswordCriteriaView(criteriaText: "Lowercase letter (a - z)")
+    private lazy var lowercaseCriteriaView: PasswordCriteriaComponent = {
+        let lowercaseCriteriaView = PasswordCriteriaComponent(criteriaText: "Lowercase letter (a - z)")
         
         lowercaseCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         lowercaseCriteriaView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,8 +121,8 @@ class SignUpView: UIView {
         return lowercaseCriteriaView
     }()
     
-    private lazy var digitCriteriaView: PasswordCriteriaView = {
-        let digitCriteriaView = PasswordCriteriaView(criteriaText: "Number (0 - 9)")
+    private lazy var digitCriteriaView: PasswordCriteriaComponent = {
+        let digitCriteriaView = PasswordCriteriaComponent(criteriaText: "Number (0 - 9)")
         
         digitCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         digitCriteriaView.translatesAutoresizingMaskIntoConstraints = false
@@ -135,13 +130,23 @@ class SignUpView: UIView {
         return digitCriteriaView
     }()
     
-    private lazy var specialCharacterCriteriaView: PasswordCriteriaView = {
-        let specialCharacterCriteriaView = PasswordCriteriaView(criteriaText: "Special character (e.g. !@#$%ˆ)")
+    private lazy var specialCharacterCriteriaView: PasswordCriteriaComponent = {
+        let specialCharacterCriteriaView = PasswordCriteriaComponent(criteriaText: "Special character (e.g. !@#$%ˆ)")
         
         specialCharacterCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         specialCharacterCriteriaView.translatesAutoresizingMaskIntoConstraints = false
         
         return specialCharacterCriteriaView
+    }()
+    
+    private lazy var confirmationPasswordTextField: PasswordTextFieldComponent = {
+        let textField = PasswordTextFieldComponent(placeholderText: "Confirm your password")
+        
+        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textField
     }()
     
     private lazy var registerButton: UIButton = {
@@ -168,7 +173,12 @@ class SignUpView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setUp()
+        setupView()
+        
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmationPasswordTextField.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -180,14 +190,13 @@ class SignUpView: UIView {
 
 extension SignUpView {
     
-    private func setUp() {
+    private func setupView() {
         style()
         layout()
         configConstraints()
     }
     
     private func style() {
-        
         self.backgroundColor = .systemBackground
     }
     
@@ -267,5 +276,60 @@ extension SignUpView {
         attrText.append(NSAttributedString(string: "Privacy Policy.", attributes: boldTextAttributes))
         
         return attrText
+    }
+}
+
+//MARK: - TextFieldComponentDelegate
+
+extension SignUpView: TextFieldComponentDelegate {
+    
+    func didFinishTyping(_ sender: TextFieldComponent, text: String?) {
+        
+    }
+}
+
+//MARK: - PasswordTextFieldComponent
+
+extension SignUpView: PasswordTextFieldComponentDelegate {
+    
+    func didStartTyping(_ sender: PasswordTextFieldComponent, text: String?) {
+        guard let text = text else {
+            return
+        }
+        
+        if sender === passwordTextField {
+            delegate?.validatePassword(text)
+        }
+    }
+    
+    func didFinishTyping(_ sender: PasswordTextFieldComponent, text: String?) {
+        
+    }
+}
+
+//MARK: - Actions
+
+extension SignUpView {
+    
+    func updateCriteriaStatus(with status: PasswordValidationResult) {
+        status.legthAndNoSpaceMet
+            ? lengthCriteriaView.isCriteriaMet = true
+            : lengthCriteriaView.reset()
+        
+        status.lowercaseMet
+            ? lowercaseCriteriaView.isCriteriaMet = true
+            : lowercaseCriteriaView.reset()
+        
+        status.uppercaseMet
+            ? uppercaseCriteriaView.isCriteriaMet = true
+            : uppercaseCriteriaView.reset()
+        
+        status.digitMet
+            ? digitCriteriaView.isCriteriaMet = true
+            : digitCriteriaView.reset()
+        
+        status.specialCharacterMet
+            ? specialCharacterCriteriaView.isCriteriaMet = true
+            : specialCharacterCriteriaView.reset()
     }
 }

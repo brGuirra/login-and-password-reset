@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         
-        let navigationVC = UINavigationController(rootViewController: HomeViewController())
+        let navigationVC = UINavigationController(rootViewController: SignUpViewController())
         window?.rootViewController = navigationVC
         
         let config = UIImage.SymbolConfiguration(pointSize: 32)

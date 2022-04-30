@@ -1,5 +1,5 @@
 //
-//  PasswordTextField.swift
+//  CustomTextField.swift
 //  Deals
 //
 //  Created by Bruno Guirra on 24/04/22.
@@ -7,15 +7,24 @@
 
 import UIKit
 
-class PasswordTextField: UIView {
+protocol TextFieldComponentDelegate: AnyObject {
     
+    func didFinishTyping(_ sender: TextFieldComponent, text: String?) -> Void
+}
+
+class TextFieldComponent: UIView {
+
+    weak var delegate: TextFieldComponentDelegate?
+    
+    private let symbolName: String
     private let placeholderText: String
+    private let capitalizationType: UITextAutocapitalizationType
     
     private lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 32)
         
-        imageView.image = UIImage(systemName: "lock.circle", withConfiguration: config)
+        imageView.image = UIImage(systemName: symbolName, withConfiguration: config)
         imageView.tintColor = .quaternaryLabel
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
@@ -27,8 +36,10 @@ class PasswordTextField: UIView {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         
+        textField.delegate = self
         textField.isSecureTextEntry = false
         textField.textColor = .label
+        textField.autocapitalizationType = capitalizationType
         textField.placeholder = placeholderText
         textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.tertiaryLabel])
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -40,7 +51,7 @@ class PasswordTextField: UIView {
     
     private lazy var dividerView: UIView = {
         let view = UIView()
-        
+            
         view.backgroundColor = .quaternaryLabel
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -48,24 +59,10 @@ class PasswordTextField: UIView {
         return view
     }()
     
-    private lazy var eyeButton: UIButton = {
-        let button = UIButton(type: .custom)
-        let config = UIImage.SymbolConfiguration(pointSize: 24)
-        let normalImage = UIImage(systemName: "eye.slash.fill", withConfiguration: config)
-        let selectedImage = UIImage(systemName: "eye.fill", withConfiguration: config)
-        
-        button.setImage(normalImage, for: .normal)
-        button.setImage(selectedImage, for: .selected)
-        button.imageView?.tintColor = .quaternaryLabel
-        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    init(placeholderText: String) {
+    init(symbolName: String, placeholderText: String, capitalizationType: UITextAutocapitalizationType) {
+        self.symbolName = symbolName
         self.placeholderText = placeholderText
+        self.capitalizationType = capitalizationType
         
         super.init(frame: .zero)
         
@@ -83,7 +80,7 @@ class PasswordTextField: UIView {
 
 //MARK: - Layout and Style
 
-extension PasswordTextField {
+extension TextFieldComponent {
     
     private func setupView() {
         layout()
@@ -93,7 +90,6 @@ extension PasswordTextField {
     private func layout() {
         addSubview(symbolImageView)
         addSubview(textField)
-        addSubview(eyeButton)
         addSubview(dividerView)
     }
     
@@ -106,18 +102,22 @@ extension PasswordTextField {
             // TextField
             textField.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
             textField.leadingAnchor.constraint(equalToSystemSpacingAfter: symbolImageView.trailingAnchor, multiplier: 1),
-            
-            // Eye Button
-            eyeButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
-            eyeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: textField.trailingAnchor, multiplier: 1),
-            eyeButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             // DividerView
             dividerView.topAnchor.constraint(equalToSystemSpacingBelow: textField.bottomAnchor, multiplier: 1),
             dividerView.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
-            dividerView.trailingAnchor.constraint(equalTo: eyeButton.trailingAnchor),
+            dividerView.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
             dividerView.heightAnchor.constraint(equalToConstant: 2),
         ])
     }
 }
 
+//MARK: - UITextFieldDelegate
+
+extension TextFieldComponent: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.didFinishTyping(self, text: textField.text)
+    }
+}

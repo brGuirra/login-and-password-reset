@@ -10,7 +10,7 @@ import UIKit
 class SignInView: UIView {
     
     private lazy var signInImageView: UIImageView = {
-        let imageView = IllustrationImageView(imageName: "SignIn")
+        let imageView = IllustrationImageComponent(imageName: "SignIn")
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -29,16 +29,16 @@ class SignInView: UIView {
         return label
     }()
     
-    private lazy var emailTextField: EmailTextField = {
-        let textField = EmailTextField(symbolName: "envelope.circle", placeholderText: "Enter your email")
+    private lazy var emailTextField: TextFieldComponent = {
+        let textField = TextFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
                 
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
     }()
     
-    private lazy var passwordTextField: PasswordTextField = {
-        let textField = PasswordTextField(placeholderText: "Enter yoru password")
+    private lazy var passwordTextField: PasswordTextFieldComponent = {
+        let textField = PasswordTextFieldComponent(placeholderText: "Enter yoru password")
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -46,7 +46,7 @@ class SignInView: UIView {
     }()
     
     private lazy var loginInButton: UIButton = {
-        let button = CustomButton(text: "Login", color: "PrimaryAccentColor")
+        let button = UIButton.createCustomButton(text: "Login", color: UIColor(named: "Blue"))
         
         button.translatesAutoresizingMaskIntoConstraints = false
         

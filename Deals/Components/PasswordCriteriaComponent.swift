@@ -7,22 +7,38 @@
 
 import UIKit
 
-enum Status: String {
-    case initial = "circle"
-    case invalid = "xmark.circle"
-    case valid = "checkmark.circle"
+enum CriteriaStatus {
+    case reset
+    case invalid
+    case valid
 }
 
-class PasswordCriteriaView: UIStackView {
+class PasswordCriteriaComponent: UIStackView {
     
     private let criteriaText: String
     
+    private let circleImage = UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16))
+    
+    private let checkmarkImage = UIImage(systemName: "checkmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16))
+    
+    private let xMarkImage = UIImage(systemName: "xmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16))
+    
+    var isCriteriaMet: Bool = false {
+        didSet {
+            if isCriteriaMet {
+                statusImageView.image = checkmarkImage
+                statusImageView.tintColor = .systemGreen
+            } else {
+                statusImageView.image = xMarkImage
+                statusImageView.tintColor = .systemPink
+            }
+        }
+    }
+    
     private lazy var statusImageView: UIImageView = {
         let imageView = UIImageView()
-        let config = UIImage.SymbolConfiguration(pointSize: 16)
-        let image = UIImage(systemName: Status.initial.rawValue, withConfiguration: config)
         
-        imageView.image = image
+        imageView.image = UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16))
         imageView.tintColor = .quaternaryLabel
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
@@ -58,7 +74,7 @@ class PasswordCriteriaView: UIStackView {
 
 //MARK: - Layout and Style
 
-extension PasswordCriteriaView {
+extension PasswordCriteriaComponent {
     
     private func setUp() {
         style()
@@ -73,5 +89,10 @@ extension PasswordCriteriaView {
     private func layout() {
         addArrangedSubview(statusImageView)
         addArrangedSubview(criteriaTextLabel)
+    }
+    
+    func reset() {
+        statusImageView.image = circleImage
+        statusImageView.tintColor = .quaternaryLabel
     }
 }

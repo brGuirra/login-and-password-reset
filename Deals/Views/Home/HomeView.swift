@@ -17,7 +17,7 @@ class HomeView: UIView {
     weak var delegate: HomeViewDelegate?
     
     private lazy var homeImageView: UIImageView = {
-        let imageView = IllustrationImageView(imageName: "Home")
+        let imageView = IllustrationImageComponent(imageName: "Home")
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
