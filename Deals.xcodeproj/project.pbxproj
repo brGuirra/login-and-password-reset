@@ -82,7 +82,7 @@
 				3D2B3235281476EB00C50BB9 /* Files */,
 				3D2B323928149D4A00C50BB9 /* Components */,
 				3D377951281DA8AD005A3BF6 /* Model */,
-				3D377953281DA8D7005A3BF6 /* Views */,
+				3D377953281DA8D7005A3BF6 /* Screens */,
 				3DDB10552817727D00AB129E /* Utils */,
 			);
 			path = Deals;
@@ -127,14 +127,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		3D377953281DA8D7005A3BF6 /* Views */ = {
+		3D377953281DA8D7005A3BF6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				3D2B32362814922500C50BB9 /* Home */,
 				3D7FCCEF2815CA0400CAB5B2 /* SignIn */,
 				3D7FCCF22815CC7100CAB5B2 /* SignUp */,
 			);
-			path = Views;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		3D7FCCEF2815CA0400CAB5B2 /* SignIn */ = {

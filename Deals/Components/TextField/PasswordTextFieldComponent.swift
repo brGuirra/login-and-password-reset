@@ -18,6 +18,16 @@ class PasswordTextFieldComponent: UIView {
     
     weak var delegate: PasswordTextFieldComponentDelegate?
     
+    var error = false {
+        didSet {
+            if error {
+                showError()
+            } else {
+                clearError()
+            }
+        }
+    }
+    
     private let placeholderText: String
     
     private lazy var symbolImageView: UIImageView = {
@@ -75,6 +85,19 @@ class PasswordTextFieldComponent: UIView {
         return button
     }()
     
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "The field is required"
+        label.textColor = .systemPink
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.isHidden = false
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
     init(placeholderText: String) {
         self.placeholderText = placeholderText
         
@@ -106,6 +129,7 @@ extension PasswordTextFieldComponent {
         addSubview(textField)
         addSubview(eyeButton)
         addSubview(dividerView)
+        addSubview(errorLabel)
     }
     
     private func configConstraints() {
@@ -128,7 +152,20 @@ extension PasswordTextFieldComponent {
             dividerView.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: eyeButton.trailingAnchor),
             dividerView.heightAnchor.constraint(equalToConstant: 2),
+            
+            //Error Label
+            errorLabel.topAnchor.constraint(equalToSystemSpacingBelow: dividerView.bottomAnchor, multiplier: 1),
+            errorLabel.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
         ])
+    }
+    
+    private func showError() {
+        errorLabel.isHidden = false
+    }
+    
+    private func clearError() {
+        errorLabel.isHidden = true
     }
 }
 
@@ -142,5 +179,13 @@ extension PasswordTextFieldComponent: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.didFinishTyping(self, text: textField.text)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true) // resign first reponder
+        
+        delegate?.didFinishTyping(self, text: textField.text)
+        
+        return true
     }
 }

@@ -59,6 +59,19 @@ class TextFieldComponent: UIView {
         return view
     }()
     
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "The field is required"
+        label.textColor = .systemPink
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.isHidden = false
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
     init(symbolName: String, placeholderText: String, capitalizationType: UITextAutocapitalizationType) {
         self.symbolName = symbolName
         self.placeholderText = placeholderText
@@ -91,6 +104,7 @@ extension TextFieldComponent {
         addSubview(symbolImageView)
         addSubview(textField)
         addSubview(dividerView)
+        addSubview(errorLabel)
     }
     
     private func configConstraints() {
@@ -109,6 +123,11 @@ extension TextFieldComponent {
             dividerView.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
             dividerView.heightAnchor.constraint(equalToConstant: 2),
+            
+            //Error Label
+            errorLabel.topAnchor.constraint(equalToSystemSpacingBelow: dividerView.bottomAnchor, multiplier: 1),
+            errorLabel.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
         ])
     }
 }
@@ -119,5 +138,13 @@ extension TextFieldComponent: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.didFinishTyping(self, text: textField.text)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true) // resign first reponder
+        
+        delegate?.didFinishTyping(self, text: textField.text)
+        
+        return true
     }
 }

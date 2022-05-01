@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SignUpViewDelegate: AnyObject {
-    func validatePassword(_ password: String) -> Void
+    func validatePasswordCriteria(_ password: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -72,7 +72,7 @@ class SignUpView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        stackView.layoutMargins = UIEdgeInsets(top: 16, left: 8, bottom: 0, right: 8)
         
         stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         
@@ -298,7 +298,7 @@ extension SignUpView: PasswordTextFieldComponentDelegate {
         }
         
         if sender === passwordTextField {
-            delegate?.validatePassword(text)
+            delegate?.validatePasswordCriteria(text)
         }
     }
     

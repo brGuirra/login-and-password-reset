@@ -26,7 +26,7 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: SignUpViewDelegate {
     
-    func validatePassword(_ password: String) {
+    func validatePasswordCriteria(_ password: String) {
         let result = appModel.isPasswordValid(password)
         
         signUpView.updateCriteriaStatus(with: result)
