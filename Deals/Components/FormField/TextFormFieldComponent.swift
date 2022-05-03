@@ -7,14 +7,7 @@
 
 import UIKit
 
-protocol TextFieldComponentDelegate: AnyObject {
-    
-    func didFinishTyping(_ sender: TextFieldComponent, text: String?) -> Void
-}
-
-class TextFieldComponent: UIView {
-
-    weak var delegate: TextFieldComponentDelegate?
+class TextFormFieldComponent: FormField {
     
     private let symbolName: String
     private let placeholderText: String
@@ -62,10 +55,10 @@ class TextFieldComponent: UIView {
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "The field is required"
+        label.text = ""
         label.textColor = .systemPink
         label.font = .preferredFont(forTextStyle: .subheadline)
-        label.isHidden = false
+        label.isHidden = true
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -89,11 +82,21 @@ class TextFieldComponent: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 200, height: 50)
     }
+    
+    func showError(message: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = message
+    }
+    
+    func clearError() {
+        errorLabel.isHidden = true
+        errorLabel.text = ""
+    }
 }
 
 //MARK: - Layout and Style
 
-extension TextFieldComponent {
+extension TextFormFieldComponent {
     
     private func setupView() {
         layout()
@@ -134,7 +137,7 @@ extension TextFieldComponent {
 
 //MARK: - UITextFieldDelegate
 
-extension TextFieldComponent: UITextFieldDelegate {
+extension TextFormFieldComponent: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.didFinishTyping(self, text: textField.text)

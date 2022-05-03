@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum CriteriaStatus {
-    case reset
-    case invalid
-    case valid
-}
-
 class PasswordCriteriaComponent: UIStackView {
     
     private let criteriaText: String

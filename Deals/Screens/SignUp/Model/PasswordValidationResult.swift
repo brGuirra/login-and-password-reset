@@ -13,4 +13,5 @@ struct PasswordValidationResult {
     let lowercaseMet: Bool
     let digitMet: Bool
     let specialCharacterMet: Bool
+    let error: (Bool, String)
 }

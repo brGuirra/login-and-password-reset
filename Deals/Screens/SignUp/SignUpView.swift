@@ -7,8 +7,13 @@
 
 import UIKit
 
+enum ErrorTarget {
+    case password
+}
+
 protocol SignUpViewDelegate: AnyObject {
     func validatePasswordCriteria(_ password: String) -> Void
+    func validatePassword(_ password: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -37,8 +42,8 @@ class SignUpView: UIView {
         return stackView
     }()
     
-    private lazy var nameTextField: TextFieldComponent = {
-        let textField = TextFieldComponent(symbolName: "person.circle", placeholderText: "Enter your name", capitalizationType: .words)
+    private lazy var nameTextField: TextFormFieldComponent = {
+        let textField = TextFormFieldComponent(symbolName: "person.circle", placeholderText: "Enter your name", capitalizationType: .words)
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -46,8 +51,8 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var emailTextField: TextFieldComponent = {
-        let textField = TextFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
+    private lazy var emailTextField: TextFormFieldComponent = {
+        let textField = TextFormFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
         
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -56,8 +61,8 @@ class SignUpView: UIView {
         return textField
     }()
     
-    private lazy var passwordTextField: PasswordTextFieldComponent = {
-        let textField = PasswordTextFieldComponent(placeholderText: "Enter your password")
+    private lazy var passwordTextField: PasswordFormFieldComponent = {
+        let textField = PasswordFormFieldComponent(placeholderText: "Enter your password")
         
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -139,8 +144,8 @@ class SignUpView: UIView {
         return specialCharacterCriteriaView
     }()
     
-    private lazy var confirmationPasswordTextField: PasswordTextFieldComponent = {
-        let textField = PasswordTextFieldComponent(placeholderText: "Confirm your password")
+    private lazy var confirmationPasswordTextField: PasswordFormFieldComponent = {
+        let textField = PasswordFormFieldComponent(placeholderText: "Confirm your password")
         
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
@@ -279,31 +284,30 @@ extension SignUpView {
     }
 }
 
-//MARK: - TextFieldComponentDelegate
+//MARK: - FormFieldDelegate
 
-extension SignUpView: TextFieldComponentDelegate {
+extension SignUpView: FormFieldDelegate {
     
-    func didFinishTyping(_ sender: TextFieldComponent, text: String?) {
-        
-    }
-}
-
-//MARK: - PasswordTextFieldComponent
-
-extension SignUpView: PasswordTextFieldComponentDelegate {
-    
-    func didStartTyping(_ sender: PasswordTextFieldComponent, text: String?) {
+    func didStartTyping(_ sender: FormField, text: String?) {
         guard let text = text else {
             return
         }
         
-        if sender === passwordTextField {
-            delegate?.validatePasswordCriteria(text)
+        switch sender {
+            case passwordTextField:
+                delegate?.validatePassword(text)
+            default:
+                return
         }
     }
     
-    func didFinishTyping(_ sender: PasswordTextFieldComponent, text: String?) {
+    func didFinishTyping(_ sender: FormField, text: String?) {
         
+        guard let text = text, sender === passwordTextField else {
+            return
+        }
+        
+        delegate?.validatePassword(text)
     }
 }
 
@@ -311,25 +315,36 @@ extension SignUpView: PasswordTextFieldComponentDelegate {
 
 extension SignUpView {
     
-    func updateCriteriaStatus(with status: PasswordValidationResult) {
-        status.legthAndNoSpaceMet
-            ? lengthCriteriaView.isCriteriaMet = true
-            : lengthCriteriaView.reset()
+    func updateCriteriaStatus(with result: PasswordValidationResult) {
         
-        status.lowercaseMet
-            ? lowercaseCriteriaView.isCriteriaMet = true
-            : lowercaseCriteriaView.reset()
+        passwordTextField.clearError()
         
-        status.uppercaseMet
-            ? uppercaseCriteriaView.isCriteriaMet = true
-            : uppercaseCriteriaView.reset()
+        result.legthAndNoSpaceMet
+        ? lengthCriteriaView.isCriteriaMet = true
+        : lengthCriteriaView.reset()
         
-        status.digitMet
-            ? digitCriteriaView.isCriteriaMet = true
-            : digitCriteriaView.reset()
+        result.lowercaseMet
+        ? lowercaseCriteriaView.isCriteriaMet = true
+        : lowercaseCriteriaView.reset()
         
-        status.specialCharacterMet
-            ? specialCharacterCriteriaView.isCriteriaMet = true
-            : specialCharacterCriteriaView.reset()
+        result.uppercaseMet
+        ? uppercaseCriteriaView.isCriteriaMet = true
+        : uppercaseCriteriaView.reset()
+        
+        result.digitMet
+        ? digitCriteriaView.isCriteriaMet = true
+        : digitCriteriaView.reset()
+        
+        result.specialCharacterMet
+        ? specialCharacterCriteriaView.isCriteriaMet = true
+        : specialCharacterCriteriaView.reset()
+        
+    }
+    
+    func displayErrorMessage(target: ErrorTarget, message: String) {
+        switch target {
+            case .password:
+                passwordTextField.showError(message)
+        }
     }
 }

@@ -29,16 +29,16 @@ class SignInView: UIView {
         return label
     }()
     
-    private lazy var emailTextField: TextFieldComponent = {
-        let textField = TextFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
+    private lazy var emailTextField: TextFormFieldComponent = {
+        let textField = TextFormFieldComponent(symbolName: "envelope.circle", placeholderText: "Enter your email", capitalizationType: .none)
                 
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
     }()
     
-    private lazy var passwordTextField: PasswordTextFieldComponent = {
-        let textField = PasswordTextFieldComponent(placeholderText: "Enter yoru password")
+    private lazy var passwordTextField: PasswordFormFieldComponent = {
+        let textField = PasswordFormFieldComponent(placeholderText: "Enter yoru password")
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         

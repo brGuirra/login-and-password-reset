@@ -7,26 +7,8 @@
 
 import UIKit
 
-protocol PasswordTextFieldComponentDelegate: AnyObject {
-    
-    func didStartTyping(_ sender: PasswordTextFieldComponent, text: String?) -> Void
-    
-    func didFinishTyping(_ sender: PasswordTextFieldComponent, text: String?) -> Void
-}
 
-class PasswordTextFieldComponent: UIView {
-    
-    weak var delegate: PasswordTextFieldComponentDelegate?
-    
-    var error = false {
-        didSet {
-            if error {
-                showError()
-            } else {
-                clearError()
-            }
-        }
-    }
+class PasswordFormFieldComponent: FormField {
     
     private let placeholderText: String
     
@@ -47,7 +29,7 @@ class PasswordTextFieldComponent: UIView {
         let textField = UITextField()
         
         textField.delegate = self
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = false
         textField.textColor = .label
         textField.autocapitalizationType = .none
         textField.placeholder = placeholderText
@@ -88,7 +70,7 @@ class PasswordTextFieldComponent: UIView {
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "The field is required"
+        label.text = ""
         label.textColor = .systemPink
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.isHidden = false
@@ -113,11 +95,21 @@ class PasswordTextFieldComponent: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 200, height: 50)
     }
+    
+    func showError(_ message: String) {
+        errorLabel.isHidden = false
+        errorLabel.text = message
+    }
+    
+    func clearError() {
+        errorLabel.isHidden = true
+        errorLabel.text = ""
+    }
 }
 
 //MARK: - Layout and Style
 
-extension PasswordTextFieldComponent {
+extension PasswordFormFieldComponent {
     
     private func setupView() {
         layout()
@@ -159,19 +151,11 @@ extension PasswordTextFieldComponent {
             errorLabel.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
         ])
     }
-    
-    private func showError() {
-        errorLabel.isHidden = false
-    }
-    
-    private func clearError() {
-        errorLabel.isHidden = true
-    }
 }
 
 //MARK: - UITextFieldDelegate
 
-extension PasswordTextFieldComponent: UITextFieldDelegate {
+extension PasswordFormFieldComponent: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegate?.didStartTyping(self, text: textField.text)

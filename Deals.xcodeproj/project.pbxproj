@@ -12,15 +12,16 @@
 		3D2B32272814712F00C50BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2B32262814712F00C50BB9 /* Assets.xcassets */; };
 		3D2B322A2814712F00C50BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D2B32282814712F00C50BB9 /* LaunchScreen.storyboard */; };
 		3D2B32382814925000C50BB9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2B32372814925000C50BB9 /* HomeView.swift */; };
-		3D377955281DA8FE005A3BF6 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D377954281DA8FE005A3BF6 /* AppModel.swift */; };
+		3D377955281DA8FE005A3BF6 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D377954281DA8FE005A3BF6 /* SignUpModel.swift */; };
 		3D377959281DAE37005A3BF6 /* PasswordValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D377958281DAE37005A3BF6 /* PasswordValidationResult.swift */; };
 		3D37795B281DAE45005A3BF6 /* PasswordCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */; };
+		3D4D88F22820A50100F99D08 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D88F12820A50100F99D08 /* FormField.swift */; };
 		3D7FCCF12815CA4600CAB5B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF02815CA4600CAB5B2 /* SignInViewController.swift */; };
 		3D7FCCF42815CC9B00CAB5B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */; };
 		3D7FCCF62815CF1A00CAB5B2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF52815CF1A00CAB5B2 /* SignInView.swift */; };
 		3D7FCCF82815D07E00CAB5B2 /* IllustrationImageComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF72815D07E00CAB5B2 /* IllustrationImageComponent.swift */; };
-		3D7FCCFA2815D41400CAB5B2 /* PasswordTextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF92815D41400CAB5B2 /* PasswordTextFieldComponent.swift */; };
-		3D7FCCFC2815D45900CAB5B2 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCFB2815D45900CAB5B2 /* TextFieldComponent.swift */; };
+		3D7FCCFA2815D41400CAB5B2 /* PasswordFormFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF92815D41400CAB5B2 /* PasswordFormFieldComponent.swift */; };
+		3D7FCCFC2815D45900CAB5B2 /* TextFormFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCFB2815D45900CAB5B2 /* TextFormFieldComponent.swift */; };
 		3D7FCCFE2815FDC200CAB5B2 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCFD2815FDC200CAB5B2 /* SignUpView.swift */; };
 		3D7FCD012816046900CAB5B2 /* PasswordCriteriaComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCD002816046900CAB5B2 /* PasswordCriteriaComponent.swift */; };
 		3DDB1057281772A800AB129E /* UIButton+CustomAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDB1056281772A800AB129E /* UIButton+CustomAppearance.swift */; };
@@ -34,15 +35,16 @@
 		3D2B32292814712F00C50BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D2B322B2814712F00C50BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D2B32372814925000C50BB9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		3D377954281DA8FE005A3BF6 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		3D377954281DA8FE005A3BF6 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		3D377958281DAE37005A3BF6 /* PasswordValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationResult.swift; sourceTree = "<group>"; };
 		3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCriteria.swift; sourceTree = "<group>"; };
+		3D4D88F12820A50100F99D08 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		3D7FCCF02815CA4600CAB5B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3D7FCCF52815CF1A00CAB5B2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		3D7FCCF72815D07E00CAB5B2 /* IllustrationImageComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllustrationImageComponent.swift; sourceTree = "<group>"; };
-		3D7FCCF92815D41400CAB5B2 /* PasswordTextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextFieldComponent.swift; sourceTree = "<group>"; };
-		3D7FCCFB2815D45900CAB5B2 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
+		3D7FCCF92815D41400CAB5B2 /* PasswordFormFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldComponent.swift; sourceTree = "<group>"; };
+		3D7FCCFB2815D45900CAB5B2 /* TextFormFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormFieldComponent.swift; sourceTree = "<group>"; };
 		3D7FCCFD2815FDC200CAB5B2 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3D7FCD002816046900CAB5B2 /* PasswordCriteriaComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCriteriaComponent.swift; sourceTree = "<group>"; };
 		3DDB1056281772A800AB129E /* UIButton+CustomAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+CustomAppearance.swift"; sourceTree = "<group>"; };
@@ -81,9 +83,8 @@
 				3D2B321D2814712C00C50BB9 /* AppDelegate.swift */,
 				3D2B3235281476EB00C50BB9 /* Files */,
 				3D2B323928149D4A00C50BB9 /* Components */,
-				3D377951281DA8AD005A3BF6 /* Model */,
-				3D377953281DA8D7005A3BF6 /* Screens */,
 				3DDB10552817727D00AB129E /* Utils */,
+				3D377953281DA8D7005A3BF6 /* Screens */,
 			);
 			path = Deals;
 			sourceTree = "<group>";
@@ -112,7 +113,7 @@
 			children = (
 				3D7FCD002816046900CAB5B2 /* PasswordCriteriaComponent.swift */,
 				3D7FCCF72815D07E00CAB5B2 /* IllustrationImageComponent.swift */,
-				3DDB10582817946500AB129E /* TextField */,
+				3DDB10582817946500AB129E /* FormField */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -120,7 +121,7 @@
 		3D377951281DA8AD005A3BF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3D377954281DA8FE005A3BF6 /* AppModel.swift */,
+				3D377954281DA8FE005A3BF6 /* SignUpModel.swift */,
 				3D377958281DAE37005A3BF6 /* PasswordValidationResult.swift */,
 				3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */,
 			);
@@ -149,8 +150,9 @@
 		3D7FCCF22815CC7100CAB5B2 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */,
+				3D377951281DA8AD005A3BF6 /* Model */,
 				3D7FCCFD2815FDC200CAB5B2 /* SignUpView.swift */,
+				3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -163,13 +165,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		3DDB10582817946500AB129E /* TextField */ = {
+		3DDB10582817946500AB129E /* FormField */ = {
 			isa = PBXGroup;
 			children = (
-				3D7FCCF92815D41400CAB5B2 /* PasswordTextFieldComponent.swift */,
-				3D7FCCFB2815D45900CAB5B2 /* TextFieldComponent.swift */,
+				3D4D88F12820A50100F99D08 /* FormField.swift */,
+				3D7FCCFB2815D45900CAB5B2 /* TextFormFieldComponent.swift */,
+				3D7FCCF92815D41400CAB5B2 /* PasswordFormFieldComponent.swift */,
 			);
-			path = TextField;
+			path = FormField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,14 +247,15 @@
 			files = (
 				3D377959281DAE37005A3BF6 /* PasswordValidationResult.swift in Sources */,
 				3D37795B281DAE45005A3BF6 /* PasswordCriteria.swift in Sources */,
+				3D4D88F22820A50100F99D08 /* FormField.swift in Sources */,
 				3D7FCCF42815CC9B00CAB5B2 /* SignUpViewController.swift in Sources */,
 				3D7FCCF62815CF1A00CAB5B2 /* SignInView.swift in Sources */,
 				3D7FCD012816046900CAB5B2 /* PasswordCriteriaComponent.swift in Sources */,
-				3D7FCCFA2815D41400CAB5B2 /* PasswordTextFieldComponent.swift in Sources */,
+				3D7FCCFA2815D41400CAB5B2 /* PasswordFormFieldComponent.swift in Sources */,
 				3DDB1057281772A800AB129E /* UIButton+CustomAppearance.swift in Sources */,
-				3D7FCCFC2815D45900CAB5B2 /* TextFieldComponent.swift in Sources */,
+				3D7FCCFC2815D45900CAB5B2 /* TextFormFieldComponent.swift in Sources */,
 				3D7FCCFE2815FDC200CAB5B2 /* SignUpView.swift in Sources */,
-				3D377955281DA8FE005A3BF6 /* AppModel.swift in Sources */,
+				3D377955281DA8FE005A3BF6 /* SignUpModel.swift in Sources */,
 				3D2B32382814925000C50BB9 /* HomeView.swift in Sources */,
 				3D2B32222814712C00C50BB9 /* HomeViewController.swift in Sources */,
 				3D7FCCF12815CA4600CAB5B2 /* SignInViewController.swift in Sources */,
