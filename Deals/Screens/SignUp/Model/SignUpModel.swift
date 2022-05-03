@@ -12,7 +12,7 @@ struct SignUpModel {
     func isPasswordValid(_ password: String) -> PasswordValidationResult {
        
         if password.isEmpty {
-            let result = PasswordValidationResult(criteriaValidation: PasswordCriteriaValidationResult(legthAndNoSpaceMet: false, uppercaseMet: false, lowercaseMet: false, digitMet: false, specialCharacterMet: false), error: PasswordError(message: "Enter your password"))
+            let result = PasswordValidationResult(criteriaValidation: PasswordCriteriaValidationResult(legthAndNoSpaceMet: false, uppercaseMet: false, lowercaseMet: false, digitMet: false, specialCharacterMet: false), error: PasswordError(message: "This field is required"))
 
             return result
         }

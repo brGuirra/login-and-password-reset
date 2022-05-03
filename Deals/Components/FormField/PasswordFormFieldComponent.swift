@@ -74,6 +74,8 @@ class PasswordFormFieldComponent: FormField {
         label.textColor = .systemPink
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.isHidden = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -127,15 +129,15 @@ extension PasswordFormFieldComponent {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             // Symbol ImageView
-            symbolImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            symbolImageView.topAnchor.constraint(equalTo: topAnchor),
             symbolImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             // TextField
-            textField.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
+            textField.topAnchor.constraint(equalTo: symbolImageView.topAnchor),
             textField.leadingAnchor.constraint(equalToSystemSpacingAfter: symbolImageView.trailingAnchor, multiplier: 1),
             
             // Eye Button
-            eyeButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
+            eyeButton.topAnchor.constraint(equalTo: textField.topAnchor),
             eyeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: textField.trailingAnchor, multiplier: 1),
             eyeButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             

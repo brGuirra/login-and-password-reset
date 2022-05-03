@@ -45,7 +45,7 @@ class SignUpView: UIView {
         let stackView = UIStackView()
         
         stackView.axis = .vertical
-        stackView.spacing = 24
+        stackView.spacing = 32
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -87,7 +87,7 @@ class SignUpView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.layoutMargins = UIEdgeInsets(top: 16, left: 8, bottom: 0, right: 8)
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 0)
         
         stackView.setContentHuggingPriority(.defaultLow, for: .vertical)
         
