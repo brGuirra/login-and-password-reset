@@ -47,14 +47,14 @@ struct SignUpModel {
 //        }
     }
     
-    func isCriteriaMet(_ password: String) -> PasswordValidationResult {
+    func isCriteriaMet(_ password: String) -> PasswordCriteriaValidationResult {
         let lengthAndNoSpaceResult = PasswordCriteria.lengthAndNoSpaceMet(password)
         let uppercaseResult = PasswordCriteria.uppercaseMet(password)
         let lowercaseResult = PasswordCriteria.lowercaseMet(password)
         let digitResult = PasswordCriteria.digitMet(password)
         let specialCharacterResult = PasswordCriteria.specialCharacterMet(password)
         
-        let result = PasswordValidationResult(legthAndNoSpaceMet: lengthAndNoSpaceResult, uppercaseMet: uppercaseResult, lowercaseMet: lowercaseResult, digitMet: digitResult, specialCharacterMet: specialCharacterResult, error: (false, ""))
+        let result = PasswordCriteriaValidationResult(legthAndNoSpaceMet: lengthAndNoSpaceResult, uppercaseMet: uppercaseResult, lowercaseMet: lowercaseResult, digitMet: digitResult, specialCharacterMet: specialCharacterResult)
         
         return result
     }

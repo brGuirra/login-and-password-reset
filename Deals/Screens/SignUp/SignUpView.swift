@@ -7,18 +7,20 @@
 
 import UIKit
 
-enum ErrorTarget {
-    case password
+enum ValidationType {
+    case inline
+    case lossOfFocus
 }
 
 protocol SignUpViewDelegate: AnyObject {
-    func validatePasswordCriteria(_ password: String) -> Void
-    func validatePassword(_ password: String) -> Void
+    func inlinePasswordValidation(password: String) -> Void
 }
 
 class SignUpView: UIView {
     
     weak var delegate: SignUpViewDelegate?
+    
+    
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -295,7 +297,7 @@ extension SignUpView: FormFieldDelegate {
         
         switch sender {
             case passwordTextField:
-                delegate?.validatePassword(text)
+                delegate?.inlinePasswordValidation(password: text)
             default:
                 return
         }
@@ -303,11 +305,10 @@ extension SignUpView: FormFieldDelegate {
     
     func didFinishTyping(_ sender: FormField, text: String?) {
         
-        guard let text = text, sender === passwordTextField else {
+        guard let text = text else {
             return
         }
-        
-        delegate?.validatePassword(text)
+
     }
 }
 
@@ -315,36 +316,40 @@ extension SignUpView: FormFieldDelegate {
 
 extension SignUpView {
     
-    func updateCriteriaStatus(with result: PasswordValidationResult) {
+    func updateCriteriaStatus(with result: PasswordCriteriaValidationResult, type: ValidationType) {
         
-        passwordTextField.clearError()
-        
-        result.legthAndNoSpaceMet
-        ? lengthCriteriaView.isCriteriaMet = true
-        : lengthCriteriaView.reset()
-        
-        result.lowercaseMet
-        ? lowercaseCriteriaView.isCriteriaMet = true
-        : lowercaseCriteriaView.reset()
-        
-        result.uppercaseMet
-        ? uppercaseCriteriaView.isCriteriaMet = true
-        : uppercaseCriteriaView.reset()
-        
-        result.digitMet
-        ? digitCriteriaView.isCriteriaMet = true
-        : digitCriteriaView.reset()
-        
-        result.specialCharacterMet
-        ? specialCharacterCriteriaView.isCriteriaMet = true
-        : specialCharacterCriteriaView.reset()
-        
-    }
-    
-    func displayErrorMessage(target: ErrorTarget, message: String) {
-        switch target {
-            case .password:
-                passwordTextField.showError(message)
+        switch type {
+            case .inline:
+                passwordTextField.clearError()
+                
+                result.legthAndNoSpaceMet
+                ? lengthCriteriaView.isCriteriaMet = true
+                : lengthCriteriaView.reset()
+                
+                result.lowercaseMet
+                ? lowercaseCriteriaView.isCriteriaMet = true
+                : lowercaseCriteriaView.reset()
+                
+                result.uppercaseMet
+                ? uppercaseCriteriaView.isCriteriaMet = true
+                : uppercaseCriteriaView.reset()
+                
+                result.digitMet
+                ? digitCriteriaView.isCriteriaMet = true
+                : digitCriteriaView.reset()
+                
+                result.specialCharacterMet
+                ? specialCharacterCriteriaView.isCriteriaMet = true
+                : specialCharacterCriteriaView.reset()
+            case .lossOfFocus:
+                return
         }
     }
+    
+//    func displayErrorMessage(target: ErrorTarget, message: String) {
+//        switch target {
+//            case .password:
+//                passwordTextField.showError(message)
+//        }
+//    }
 }

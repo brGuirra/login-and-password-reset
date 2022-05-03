@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct PasswordCriteriaValidationResult {
+    let legthAndNoSpaceMet: Bool
+    let uppercaseMet: Bool
+    let lowercaseMet: Bool
+    let digitMet: Bool
+    let specialCharacterMet: Bool
+}
+
 struct PasswordCriteria {
     static func lengthCriteriaMet(_ text: String) -> Bool {
         text.count >= 8 && text.count <= 32

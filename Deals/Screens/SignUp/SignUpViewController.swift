@@ -9,7 +9,7 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
-    let appModel = SignUpModel()
+    let signUpModel = SignUpModel()
 
     private let signUpView: SignUpView = {
         let view = SignUpView()
@@ -26,13 +26,9 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: SignUpViewDelegate {
     
-    func validatePasswordCriteria(_ password: String) {
-        let result = appModel.isCriteriaMet(password)
+    func inlinePasswordValidation(password: String) {
+        let result = signUpModel.isCriteriaMet(password)
         
-        signUpView.updateCriteriaStatus(with: result)
-    }
-    
-    func validatePassword(_ password: String) {
-
+        signUpView.updateCriteriaStatus(with: result, type: .inline)
     }
 }
