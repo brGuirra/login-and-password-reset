@@ -15,6 +15,7 @@
 		3D377955281DA8FE005A3BF6 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D377954281DA8FE005A3BF6 /* SignUpModel.swift */; };
 		3D37795B281DAE45005A3BF6 /* PasswordCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */; };
 		3D4D88F22820A50100F99D08 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D88F12820A50100F99D08 /* FormField.swift */; };
+		3D4D88F42820B5E600F99D08 /* PasswordValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D88F32820B5E600F99D08 /* PasswordValidationResult.swift */; };
 		3D7FCCF12815CA4600CAB5B2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF02815CA4600CAB5B2 /* SignInViewController.swift */; };
 		3D7FCCF42815CC9B00CAB5B2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */; };
 		3D7FCCF62815CF1A00CAB5B2 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7FCCF52815CF1A00CAB5B2 /* SignInView.swift */; };
@@ -37,6 +38,7 @@
 		3D377954281DA8FE005A3BF6 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCriteria.swift; sourceTree = "<group>"; };
 		3D4D88F12820A50100F99D08 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		3D4D88F32820B5E600F99D08 /* PasswordValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationResult.swift; sourceTree = "<group>"; };
 		3D7FCCF02815CA4600CAB5B2 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3D7FCCF32815CC9B00CAB5B2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3D7FCCF52815CF1A00CAB5B2 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				3D377954281DA8FE005A3BF6 /* SignUpModel.swift */,
 				3D37795A281DAE45005A3BF6 /* PasswordCriteria.swift */,
+				3D4D88F32820B5E600F99D08 /* PasswordValidationResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D37795B281DAE45005A3BF6 /* PasswordCriteria.swift in Sources */,
+				3D4D88F42820B5E600F99D08 /* PasswordValidationResult.swift in Sources */,
 				3D4D88F22820A50100F99D08 /* FormField.swift in Sources */,
 				3D7FCCF42815CC9B00CAB5B2 /* SignUpViewController.swift in Sources */,
 				3D7FCCF62815CF1A00CAB5B2 /* SignInView.swift in Sources */,

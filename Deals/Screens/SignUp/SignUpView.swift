@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum FormTarget {
+    case name
+    case email
+    case password
+    case confirmationPassword
+}
+
 enum ValidationType {
     case inline
     case lossOfFocus
@@ -14,6 +21,7 @@ enum ValidationType {
 
 protocol SignUpViewDelegate: AnyObject {
     func inlinePasswordValidation(password: String) -> Void
+    func lossOfFocusPasswordValidation(password: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -138,7 +146,7 @@ class SignUpView: UIView {
     }()
     
     private lazy var specialCharacterCriteriaView: PasswordCriteriaComponent = {
-        let specialCharacterCriteriaView = PasswordCriteriaComponent(criteriaText: "Special character (e.g. !@#$%ˆ)")
+        let specialCharacterCriteriaView = PasswordCriteriaComponent(criteriaText: "Special character, e.g: .,@:?!()$\\/#)")
         
         specialCharacterCriteriaView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         specialCharacterCriteriaView.translatesAutoresizingMaskIntoConstraints = false
@@ -304,11 +312,16 @@ extension SignUpView: FormFieldDelegate {
     }
     
     func didFinishTyping(_ sender: FormField, text: String?) {
-        
         guard let text = text else {
             return
         }
-
+        
+        switch sender {
+            case passwordTextField:
+                delegate?.lossOfFocusPasswordValidation(password: text)
+            default:
+                return
+        }
     }
 }
 
@@ -342,14 +355,24 @@ extension SignUpView {
                 ? specialCharacterCriteriaView.isCriteriaMet = true
                 : specialCharacterCriteriaView.reset()
             case .lossOfFocus:
-                return
+                lengthCriteriaView.isCriteriaMet = result.legthAndNoSpaceMet
+                lowercaseCriteriaView.isCriteriaMet = result.lowercaseMet
+                uppercaseCriteriaView.isCriteriaMet = result.uppercaseMet
+                digitCriteriaView.isCriteriaMet = result.digitMet
+                specialCharacterCriteriaView.isCriteriaMet = result.specialCharacterMet
         }
     }
     
-//    func displayErrorMessage(target: ErrorTarget, message: String) {
-//        switch target {
-//            case .password:
-//                passwordTextField.showError(message)
-//        }
-//    }
+    func displayErrorMessage(target: FormTarget, message: String) {
+        switch target {
+            case .password:
+                passwordTextField.showError(message)
+            case .name:
+                return
+            case .email:
+                return
+            case .confirmationPassword:
+                return
+        }
+    }
 }

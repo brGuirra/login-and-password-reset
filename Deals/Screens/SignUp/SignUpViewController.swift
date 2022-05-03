@@ -31,4 +31,14 @@ extension SignUpViewController: SignUpViewDelegate {
         
         signUpView.updateCriteriaStatus(with: result, type: .inline)
     }
+    
+    func lossOfFocusPasswordValidation(password: String) {
+        let result = signUpModel.isPasswordValid(password)
+        
+        if let error = result.error {
+            signUpView.displayErrorMessage(target: .password, message: error.message)
+        }
+        
+        signUpView.updateCriteriaStatus(with: result.criteriaValidation, type: .lossOfFocus)        
+    }
 }
