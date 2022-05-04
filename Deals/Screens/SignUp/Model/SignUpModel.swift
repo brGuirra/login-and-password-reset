@@ -7,12 +7,26 @@
 
 import Foundation
 
+enum ErrorMessage: String {
+    case empty = "This field is required"
+    case passwordInvalidSpecialCharacter = "Enter valid special chars .,@:?!()$\\/#) with no spaces"
+    case passwordNotMetCriteria = "Your password must meet the requirements below"
+}
+
 struct SignUpModel {
     
+    func isNameValid(_ name: String) -> (Bool, ValidationError?) {
+        if name.isEmpty {
+            return (false, ValidationError(message: ErrorMessage.empty.rawValue))
+        }
+        
+        return (true, nil)
+    }
+    
     func isPasswordValid(_ password: String) -> PasswordValidationResult {
-       
+        
         if password.isEmpty {
-            let result = PasswordValidationResult(criteriaValidation: PasswordCriteriaValidationResult(legthAndNoSpaceMet: false, uppercaseMet: false, lowercaseMet: false, digitMet: false, specialCharacterMet: false), error: PasswordError(message: "This field is required"))
+            let result = PasswordValidationResult(criteriaValidation: PasswordCriteriaValidationResult(legthAndNoSpaceMet: false, uppercaseMet: false, lowercaseMet: false, digitMet: false, specialCharacterMet: false), error: ValidationError(message: ErrorMessage.empty.rawValue))
 
             return result
         }
@@ -23,7 +37,7 @@ struct SignUpModel {
         let validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
         let invalidSet = CharacterSet(charactersIn: validChars).inverted
         if password.rangeOfCharacter(from: invalidSet) != nil {
-            let result = PasswordValidationResult(criteriaValidation: criteriaResult, error: PasswordError(message: "Enter valid special chars .,@:?!()$\\/#) with no spaces"))
+            let result = PasswordValidationResult(criteriaValidation: criteriaResult, error: ValidationError(message: ErrorMessage.passwordInvalidSpecialCharacter.rawValue))
 
             return result
         }
@@ -36,7 +50,7 @@ struct SignUpModel {
             
             return result
         } else {
-            let result = PasswordValidationResult(criteriaValidation: criteriaResult, error: PasswordError(message: "Your password must meet the requirements below"))
+            let result = PasswordValidationResult(criteriaValidation: criteriaResult, error: ValidationError(message: ErrorMessage.passwordNotMetCriteria.rawValue))
             
             return result
         }

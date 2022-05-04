@@ -22,6 +22,7 @@ enum ValidationType {
 protocol SignUpViewDelegate: AnyObject {
     func inlinePasswordValidation(password: String) -> Void
     func lossOfFocusPasswordValidation(password: String) -> Void
+    func nameValidation(name: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -303,11 +304,8 @@ extension SignUpView: FormFieldDelegate {
             return
         }
         
-        switch sender {
-            case passwordTextField:
-                delegate?.inlinePasswordValidation(password: text)
-            default:
-                return
+        if sender === passwordTextField {
+            delegate?.inlinePasswordValidation(password: text)
         }
     }
     
@@ -317,6 +315,8 @@ extension SignUpView: FormFieldDelegate {
         }
         
         switch sender {
+            case nameTextField:
+                delegate?.nameValidation(name: text)
             case passwordTextField:
                 delegate?.lossOfFocusPasswordValidation(password: text)
             default:
@@ -368,7 +368,7 @@ extension SignUpView {
             case .password:
                 passwordTextField.showError(message)
             case .name:
-                return
+                nameTextField.showError(message)
             case .email:
                 return
             case .confirmationPassword:

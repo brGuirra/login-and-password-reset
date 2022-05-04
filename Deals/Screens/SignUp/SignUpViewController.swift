@@ -26,6 +26,14 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: SignUpViewDelegate {
     
+    func nameValidation(name: String) {
+        let result = signUpModel.isNameValid(name)
+        
+        if let error = result.1 {
+            signUpView.displayErrorMessage(target: .name, message: error.message)
+        }
+    }
+    
     func inlinePasswordValidation(password: String) {
         let result = signUpModel.isCriteriaMet(password)
         
