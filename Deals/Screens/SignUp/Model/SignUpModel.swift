@@ -83,4 +83,13 @@ struct SignUpModel {
         
         return result
     }
+    
+    func isConfirmationPasswordValid(_ password: String, _ confirmationPassword: String) -> (Bool, ValidationError?) {
+        
+        if password == confirmationPassword {
+            return (true, nil)
+        }
+        
+        return (false, ValidationError(message: "Passwords do not match"))
+    }
 }

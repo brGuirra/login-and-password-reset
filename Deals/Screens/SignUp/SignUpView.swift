@@ -24,6 +24,7 @@ protocol SignUpViewDelegate: AnyObject {
     func lossOfFocusPasswordValidation(password: String) -> Void
     func nameValidation(name: String) -> Void
     func emailValidation(email: String) -> Void
+    func confirmationPasswordValidation(password: String, confirmationPassword: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -332,6 +333,9 @@ extension SignUpView: FormFieldDelegate {
                 delegate?.emailValidation(email: text)
             case passwordTextField:
                 delegate?.lossOfFocusPasswordValidation(password: text)
+            case confirmationPasswordTextField:
+                guard let password = passwordTextField.text else { return }
+                delegate?.confirmationPasswordValidation(password: password, confirmationPassword: text)
             default:
                 return
         }
@@ -385,7 +389,7 @@ extension SignUpView {
             case .email:
                 emailTextField.showError(message)
             case .confirmationPassword:
-                return
+                confirmationPasswordTextField.showError(message)
         }
     }
 }

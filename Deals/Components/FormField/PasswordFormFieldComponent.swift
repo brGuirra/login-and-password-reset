@@ -12,6 +12,10 @@ class PasswordFormFieldComponent: FormField {
     
     private let placeholderText: String
     
+    var text: String? {
+        textField.text
+    }
+    
     private lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 32)
