@@ -90,7 +90,7 @@ class TextFormFieldComponent: FormField {
         errorLabel.text = message
     }
     
-    func clearError() {
+    override func clearError() {
         errorLabel.isHidden = true
         errorLabel.text = ""
     }
@@ -140,6 +140,10 @@ extension TextFormFieldComponent {
 //MARK: - UITextFieldDelegate
 
 extension TextFormFieldComponent: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        delegate?.didStartTyping(self, text: textField.text)
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.didFinishTyping(self, text: textField.text)

@@ -23,6 +23,22 @@ struct SignUpModel {
         return (true, nil)
     }
     
+    func isEmailValid(_ email: String) -> (Bool, ValidationError?) {
+        if email.isEmpty {
+            return (false, ValidationError(message: ErrorMessage.empty.rawValue))
+        }
+        
+        let emailPattern = #"^\S+@\S+\.\S+$"#
+    
+        let result = email.range(of: emailPattern, options: .regularExpression) != nil
+        
+        if !result {
+            return (false, ValidationError(message: "Email a valid email, eg: your@email.com"))
+        }
+        
+        return (true, nil)
+    }
+    
     func isPasswordValid(_ password: String) -> PasswordValidationResult {
         
         if password.isEmpty {

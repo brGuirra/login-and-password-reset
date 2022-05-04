@@ -23,6 +23,7 @@ protocol SignUpViewDelegate: AnyObject {
     func inlinePasswordValidation(password: String) -> Void
     func lossOfFocusPasswordValidation(password: String) -> Void
     func nameValidation(name: String) -> Void
+    func emailValidation(email: String) -> Void
 }
 
 class SignUpView: UIView {
@@ -304,8 +305,18 @@ extension SignUpView: FormFieldDelegate {
             return
         }
         
-        if sender === passwordTextField {
-            delegate?.inlinePasswordValidation(password: text)
+        switch sender {
+            case nameTextField:
+                nameTextField.clearError()
+            case emailTextField:
+                emailTextField.clearError()
+            case passwordTextField:
+                passwordTextField.clearError()
+                delegate?.inlinePasswordValidation(password: text)
+            case confirmationPasswordTextField:
+                confirmationPasswordTextField.clearError()
+            default:
+                return
         }
     }
     
@@ -317,6 +328,8 @@ extension SignUpView: FormFieldDelegate {
         switch sender {
             case nameTextField:
                 delegate?.nameValidation(name: text)
+            case emailTextField:
+                delegate?.emailValidation(email: text)
             case passwordTextField:
                 delegate?.lossOfFocusPasswordValidation(password: text)
             default:
@@ -370,7 +383,7 @@ extension SignUpView {
             case .name:
                 nameTextField.showError(message)
             case .email:
-                return
+                emailTextField.showError(message)
             case .confirmationPassword:
                 return
         }

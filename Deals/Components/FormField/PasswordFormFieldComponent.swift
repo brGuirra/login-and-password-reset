@@ -73,7 +73,7 @@ class PasswordFormFieldComponent: FormField {
         label.text = ""
         label.textColor = .systemPink
         label.font = .preferredFont(forTextStyle: .subheadline)
-        label.isHidden = false
+        label.isHidden = true
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         
@@ -103,7 +103,7 @@ class PasswordFormFieldComponent: FormField {
         errorLabel.text = message
     }
     
-    func clearError() {
+    override func clearError() {
         errorLabel.isHidden = true
         errorLabel.text = ""
     }

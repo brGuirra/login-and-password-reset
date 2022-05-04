@@ -31,6 +31,15 @@ extension SignUpViewController: SignUpViewDelegate {
         
         if let error = result.1 {
             signUpView.displayErrorMessage(target: .name, message: error.message)
+            return
+        }
+    }
+    
+    func emailValidation(email: String) {
+       let result = signUpModel.isEmailValid(email)
+        
+        if let error = result.1 {
+            signUpView.displayErrorMessage(target: .email, message: error.message)
         }
     }
     

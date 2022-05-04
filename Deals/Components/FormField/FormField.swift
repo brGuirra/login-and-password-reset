@@ -17,4 +17,8 @@ protocol FormFieldDelegate: AnyObject {
 class FormField: UIView {
     
     weak var delegate: FormFieldDelegate?
+    
+    func clearError() {
+        
+    }
 }
